@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ZiackaKnizka</string>
+    <string name="main_activity_zoznam_studentov">zoznam studentov:</string>
 </resources>
