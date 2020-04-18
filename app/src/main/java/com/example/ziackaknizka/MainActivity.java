@@ -1,10 +1,15 @@
 package com.example.ziackaknizka;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,19 +20,35 @@ public class MainActivity extends AppCompatActivity {
     Pri výbere položky editovať alebo pridať sa zobrazí zoznam známok a bude možné pridať študentovi novú známku alebo upraviť existujúce známky.
 */
     ArrayList<Student> zoznamStudentov;
+    ListView list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         zoznamStudentov = new ArrayList<>();
-        naplnZoznamStudentov();
+        list = findViewById(R.id.listView_zoznamStudentov);
+        naplnZoznamStudentov(zoznamStudentov);
+
+        ArrayAdapter<Student> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,zoznamStudentov);
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // len na vypis
+                Toast.makeText(MainActivity.this, zoznamStudentov.get(position).toString(),Toast.LENGTH_LONG).show();
+            }
+        });
+
 }
 
 
-    private void naplnZoznamStudentov() {
+    private void naplnZoznamStudentov(List list) {
         String []mena={"Jan","Frantisek","Stefan","Jozef","Peter","Ivan","Jakub","Anton","Martin"};
-        String []priezviska ={"Novotny","Adamec","Bahno","Bobula","Cibula","Lopta","Lopata","Semafor"};
+        String []priezviska ={"Novotny","Adamec","Bahno","Bobula","Cibula","Lopta","Lopata","Semafor"
+                                ,"Zavinac","Bravcovy","Papierovy","Stol","Novovytvoreny","Stary"};
 
         for(int i = 0;i<20;i++){
             Student student = new Student(vyberNahodnyPrvok(mena),vyberNahodnyPrvok(priezviska));
@@ -39,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
             student.upravZnamkuPredmetu(student.getPredmet(2),vyberNahodnuZnamku());
             student.pridajPredmet(Predmet.VMA);
             student.upravZnamkuPredmetu(student.getPredmet(3),vyberNahodnuZnamku());
+            list.add(student);
         }
-
-
     }
 
     private String vyberNahodnyPrvok(String [] pole){

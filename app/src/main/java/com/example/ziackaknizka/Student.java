@@ -1,5 +1,7 @@
 package com.example.ziackaknizka;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 class Student {
@@ -42,5 +44,10 @@ class Student {
 
     public void setPriezvisko(String priezvisko) {
         this.priezvisko = priezvisko;
+    }
+
+    @Override
+    public String toString() {
+        return meno+" "+priezvisko;
     }
 }

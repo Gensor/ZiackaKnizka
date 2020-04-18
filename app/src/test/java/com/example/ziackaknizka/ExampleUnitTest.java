@@ -1,14 +1,11 @@
 package com.example.ziackaknizka;
 
-
 import org.junit.jupiter.api.BeforeEach;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.Assert.*;
+
 class Testy {
 
 
