@@ -1,13 +1,14 @@
 package com.example.ziackaknizka;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // len na vypis
-                Toast.makeText(MainActivity.this, zoznamStudentov.get(position).toString(),Toast.LENGTH_LONG).show();
+                Intent intent_student_zoznamZnamok = new Intent(MainActivity.this, ZoznamZnamok.class);
+                intent_student_zoznamZnamok.putExtra("id_student",position);
+                intent_student_zoznamZnamok.putExtra("zoznamPredmetov",zoznamStudentov.get(position).vypisStudentovePredmety());
+                startActivity(intent_student_zoznamZnamok);
             }
         });
 

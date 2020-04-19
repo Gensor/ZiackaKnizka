@@ -30,6 +30,19 @@ class Student {
         studentovePredmety.add(novyPredmet);
     }
 
+    public String vypisStudentovePredmety(){
+        String vysledok ="";
+        for (int i=0;i<studentovePredmety.size();i++){
+            StudentovPredmet predmet = studentovePredmety.get(i);
+
+            String hodnotenie = predmet.getHodnotenie().toString();
+            if(hodnotenie.equals("EMPTY"))hodnotenie="";
+
+            vysledok+=String.format("%-37s : %2s ,\n",predmet.getPredmet().getNazov(),hodnotenie);
+        }
+        return vysledok;
+    }
+
     public String getMeno() {
         return meno;
     }
