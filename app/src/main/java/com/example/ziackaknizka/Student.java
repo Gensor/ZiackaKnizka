@@ -1,7 +1,5 @@
 package com.example.ziackaknizka;
 
-import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
 
 class Student {
