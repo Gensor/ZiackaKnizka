@@ -1,8 +1,11 @@
 package com.example.ziackaknizka;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-class Student {
+class Student implements Parcelable {
     private String meno;
     private String priezvisko;
     private ArrayList<StudentovPredmet> studentovePredmety;
@@ -12,6 +15,29 @@ class Student {
         this.priezvisko = priezvisko;
         this.studentovePredmety =new ArrayList<>();
     }
+
+    protected Student(Parcel in) {
+        meno = in.readString();
+        priezvisko = in.readString();
+        if (in.readByte() == 0x01) {
+            studentovePredmety = new ArrayList<StudentovPredmet>();
+            in.readList(studentovePredmety, StudentovPredmet.class.getClassLoader());
+        } else {
+            studentovePredmety = null;
+        }
+    }
+
+    public static final Creator<Student> CREATOR = new Creator<Student>() {
+        @Override
+        public Student createFromParcel(Parcel in) {
+            return new Student(in);
+        }
+
+        @Override
+        public Student[] newArray(int size) {
+            return new Student[size];
+        }
+    };
 
     public StudentovPredmet getPredmet(int i){
         if((i>=0)&&(i<studentovePredmety.size())) {
@@ -57,8 +83,29 @@ class Student {
         this.priezvisko = priezvisko;
     }
 
+    public ArrayList<StudentovPredmet> getStudentovePredmety() {
+        return studentovePredmety;
+    }
+
     @Override
     public String toString() {
         return meno+" "+priezvisko;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(meno);
+        dest.writeString(priezvisko);
+        if (studentovePredmety == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(studentovePredmety);
+        }
     }
 }

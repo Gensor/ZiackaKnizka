@@ -1,6 +1,9 @@
 package com.example.ziackaknizka;
 
-class StudentovPredmet {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+class StudentovPredmet implements Parcelable{
     private Predmet predmet;
     private Znamka hodnotenie;
 
@@ -8,6 +11,23 @@ class StudentovPredmet {
         this.predmet = predmet;
         this.hodnotenie= Znamka.EMPTY;
     }
+
+    protected StudentovPredmet(Parcel in) {
+        predmet = (Predmet) in.readValue(Predmet.class.getClassLoader());
+        hodnotenie = (Znamka) in.readValue(Znamka.class.getClassLoader());
+    }
+
+    public static final Creator<StudentovPredmet> CREATOR = new Creator<StudentovPredmet>() {
+        @Override
+        public StudentovPredmet createFromParcel(Parcel in) {
+            return new StudentovPredmet(in);
+        }
+
+        @Override
+        public StudentovPredmet[] newArray(int size) {
+            return new StudentovPredmet[size];
+        }
+    };
 
     public Predmet getPredmet() {
         return predmet;
@@ -23,5 +43,16 @@ class StudentovPredmet {
 
     public void setHodnotenie(Znamka hodnotenie) {
         this.hodnotenie = hodnotenie;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(predmet);
+        dest.writeValue(hodnotenie);
     }
 }
