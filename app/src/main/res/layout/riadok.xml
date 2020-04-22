@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     >
 
-    <Button
-        android:id="@+id/riadok_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="19dp"
-        android:text="Button" />
 
     <TextView
         android:id="@+id/riadok_textview_nazovPredmetu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="false"
-        android:text="" />
-</RelativeLayout>
+        android:paddingLeft="10dp"
+        android:text="TextView" />
+
+    <Spinner
+        android:id="@+id/riadok_spinner_znamky"
+        android:layout_width="match_parent"
+        android:textAlignment="viewEnd"
+        android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>

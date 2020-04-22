@@ -17,15 +17,17 @@ public class ZoznamZnamok extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoznam_znamok);
         textView_zoznamPredmetov = findViewById(R.id.textView_zoznamPredmetov);
-        Intent intent_studentInfo = getIntent();
-        textView_zoznamPredmetov.setText(intent_studentInfo.getStringExtra("zoznamPredmetov"));
+        final Intent intent_studentInfo = getIntent();
         student = intent_studentInfo.getParcelableExtra("student");
+        textView_zoznamPredmetov.setText(student.vypisStudentovePredmety());
 
         buttonPridajUprav = findViewById(R.id.button_pridatUpravit);
         buttonPridajUprav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_zoznamPredmetov = new Intent(this.ZoznamZnamok,)
+               Intent intent_zoznamPredmetov = new Intent(ZoznamZnamok.this,PridajUprav.class);
+               intent_zoznamPredmetov.putExtra("student",student);
+               startActivity(intent_zoznamPredmetov);
             }
         });
     }

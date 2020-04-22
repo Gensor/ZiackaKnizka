@@ -8,8 +8,10 @@
 
 
     <ListView
-        android:id="@+id/PridajUprav_listview"
+        android:id="@+id/pridajUprav_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
