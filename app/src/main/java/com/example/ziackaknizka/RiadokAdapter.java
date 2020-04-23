@@ -33,10 +33,8 @@ public class RiadokAdapter extends ArrayAdapter<StudentovPredmet> {
             riadok = inflater.inflate(R.layout.riadok,parent,false);
         }
 
-
         TextView label =  riadok.findViewById(R.id.riadok_textview_nazovPredmetu);
         final Spinner spinner =  riadok.findViewById(R.id.riadok_spinner_znamky);
-
 
         label.setText(data.get(position).getPredmet().getNazov());
 
@@ -45,15 +43,14 @@ public class RiadokAdapter extends ArrayAdapter<StudentovPredmet> {
         spinner.setAdapter(adapterSpiner);
 
         spinner.setSelection(data.get(position).getHodnotenie().getZnamkaCislo());
-            final int poziciaPredmetu = position;
+        final int poziciaPredmetu = position;
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Znamka znamka = Znamka.valueOf(Znamka.getValue(position));
                 data.get(poziciaPredmetu).setHodnotenie(znamka);
                 adapterSpiner.notifyDataSetChanged();
-
-
             }
 
             @Override
@@ -65,8 +62,6 @@ public class RiadokAdapter extends ArrayAdapter<StudentovPredmet> {
 
         return riadok;
     }
-
-
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
 /*
     Vytvorte aplikáciu, ktorá bude zobrazovať zoznam študentov.
     Po kliknutí na študenta sa v novom okne zobrazia jeho známky oddelené čiarkou.
-    Pri výbere položky editovať alebo pridať sa zobrazí zoznam známok a bude možné pridať študentovi novú známku alebo upraviť existujúce známky.
+    Pri výbere položky editovať alebo pridať sa zobrazí zoznam známok a bude možné pridať študentovi
+    novú známku alebo upraviť existujúce známky.
 */
     ArrayList<Student> zoznamStudentov;
     ListView list;
@@ -54,14 +54,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent idata) {
         super.onActivityResult(requestCode, resultCode, idata);
-        Toast.makeText(this,"som tuto RESULT CODE JE : "+resultCode,Toast.LENGTH_SHORT).show();
         if(resultCode==1){
-            Toast.makeText(this,"som tuto",Toast.LENGTH_SHORT).show();
             Student student=idata.getParcelableExtra("student");
-
             zoznamStudentov.set(studentID,student);
-            System.out.println(student.vypisStudentovePredmety());//tototototototoot
-
         }
     }
 

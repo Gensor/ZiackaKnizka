@@ -33,10 +33,6 @@ class StudentovPredmet implements Parcelable{
         return predmet;
     }
 
-    public void setPredmet(Predmet predmet) {
-        this.predmet = predmet;
-    }
-
     public Znamka getHodnotenie() {
         return hodnotenie;
     }
