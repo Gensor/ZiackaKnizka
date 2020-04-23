@@ -1,5 +1,6 @@
 package com.example.ziackaknizka;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 */
     ArrayList<Student> zoznamStudentov;
     ListView list;
+    int studentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +40,30 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                studentID=position;
                 Student student = zoznamStudentov.get(position);
                 Intent intent_student_zoznamZnamok = new Intent(MainActivity.this, ZoznamZnamok.class);
                 intent_student_zoznamZnamok.putExtra("student",  student);
-                startActivity(intent_student_zoznamZnamok);
+                startActivityForResult(intent_student_zoznamZnamok,1);
+
             }
         });
 
 }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent idata) {
+        super.onActivityResult(requestCode, resultCode, idata);
+        Toast.makeText(this,"som tuto RESULT CODE JE : "+resultCode,Toast.LENGTH_SHORT).show();
+        if(resultCode==1){
+            Toast.makeText(this,"som tuto",Toast.LENGTH_SHORT).show();
+            Student student=idata.getParcelableExtra("student");
+
+            zoznamStudentov.set(studentID,student);
+            System.out.println(student.vypisStudentovePredmety());//tototototototoot
+
+        }
+    }
 
     private void naplnZoznamStudentov(List list) {
         String []mena={"Jan","Frantisek","Stefan","Jozef","Peter","Ivan","Jakub","Anton","Martin"};

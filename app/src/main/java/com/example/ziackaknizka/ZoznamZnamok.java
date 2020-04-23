@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ZoznamZnamok extends AppCompatActivity {
-    TextView textView_zoznamPredmetov ;
+   static TextView textView_zoznamPredmetov ;
     Button buttonPridajUprav;
     Student student;
     @Override
@@ -27,10 +27,32 @@ public class ZoznamZnamok extends AppCompatActivity {
             public void onClick(View v) {
                Intent intent_zoznamPredmetov = new Intent(ZoznamZnamok.this,PridajUprav.class);
                intent_zoznamPredmetov.putExtra("student",student);
-               startActivity(intent_zoznamPredmetov);
+               startActivityForResult(intent_zoznamPredmetov,1);
             }
         });
+        textView_zoznamPredmetov.setText(student.vypisStudentovePredmety());
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent idata) {
+        super.onActivityResult(requestCode, resultCode, idata);
 
+        if(resultCode==1){
+            student=idata.getParcelableExtra("student");
+            textView_zoznamPredmetov.setText(student.vypisStudentovePredmety());
+            Intent intent_vysledok = new Intent();
+            intent_vysledok.putExtra("student",student);
+
+            setResult(1,intent_vysledok);
+
+          finish();
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Toast.makeText(this,"Zoznam znamok klassa",Toast.LENGTH_SHORT).show();
+    }
 }

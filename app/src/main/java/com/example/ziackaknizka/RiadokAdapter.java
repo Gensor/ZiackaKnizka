@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class RiadokAdapter extends ArrayAdapter<StudentovPredmet> {
     Context context;
     ArrayList<StudentovPredmet> data = new ArrayList<StudentovPredmet>();
+    ArrayAdapter<CharSequence> adapterSpiner;
 
     public RiadokAdapter(@NonNull Context context, ArrayList<StudentovPredmet> data) {
         super(context,R.layout.riadok,data);
@@ -39,7 +40,7 @@ public class RiadokAdapter extends ArrayAdapter<StudentovPredmet> {
 
         label.setText(data.get(position).getPredmet().getNazov());
 
-        final ArrayAdapter<CharSequence> adapterSpiner = ArrayAdapter.createFromResource(parent.getContext(),R.array.znamky,android.R.layout.simple_spinner_item);
+        adapterSpiner= ArrayAdapter.createFromResource(parent.getContext(),R.array.znamky,android.R.layout.simple_spinner_item);
         adapterSpiner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapterSpiner);
 
@@ -50,6 +51,7 @@ public class RiadokAdapter extends ArrayAdapter<StudentovPredmet> {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Znamka znamka = Znamka.valueOf(Znamka.getValue(position));
                 data.get(poziciaPredmetu).setHodnotenie(znamka);
+                adapterSpiner.notifyDataSetChanged();
 
 
             }
